@@ -17,23 +17,23 @@ namespace DriveAPI.Controllers
             _fileBS = fileBS;
         }
 
-        [HttpGet]
-        public Filew GetFile(int id)
+        [HttpGet("[action]")]
+        public Filew GetFile(long id)
         {
             return _fileBS.GetFile(id);
         }
-        [HttpPost]
+        [HttpPost("[action]")]
         public Filew PostFile(Filew file)
         {
             return _fileBS.PostFile(file);
         }
-        [HttpPut]
-        public Filew PutFile(int id, Filew file)
+        [HttpPut("[action]")]
+        public Filew PutFile(long id, Filew file)
         {
             return _fileBS.PutFile(id, file);
         }
-        [HttpDelete]
-        public int DeleteFile(int id)
+        [HttpDelete("[action]")]
+        public long DeleteFile(long id)
         {
             return _fileBS.DeleteFile(id);
         }
