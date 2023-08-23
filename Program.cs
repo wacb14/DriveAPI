@@ -1,6 +1,11 @@
+using DriveAPI.BussinesServices;
+using DriveAPI.DataServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<IFileDS, FileDS>();
+builder.Services.AddTransient<IFileBS, FileBS>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

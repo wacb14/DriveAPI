@@ -1,6 +1,6 @@
 namespace DriveAPI.Models
 {
-    public class File
+    public class Filew
     {
         public long id { get; set; }
         public string name { get; set; }

@@ -8,7 +8,7 @@ namespace DriveAPI.Models
         {
         }
         // Tables
-        public DbSet<File> File { get; set; } = null;
+        public DbSet<Filew> File { get; set; } = null;
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             // Tables' relations
             
