@@ -9,7 +9,7 @@ namespace DriveAPI.DataServices
         {
             _generalContext = generalContext;
         }
-        public Filew GetFile(int id)
+        public Filew GetFile(long id)
         {
             return _generalContext.File.Find(id);
         }
@@ -19,7 +19,7 @@ namespace DriveAPI.DataServices
             _generalContext.SaveChanges();
             return _generalContext.File.FirstOrDefault(f => f.id == file.id);
         }
-        public Filew PutFile(int id, Filew file)
+        public Filew PutFile(long id, Filew file)
         {
             if (file != null)
             {
@@ -28,7 +28,7 @@ namespace DriveAPI.DataServices
             }
             return _generalContext.File.FirstOrDefault(f => f.id == file.id);
         }
-        public int DeleteFile(int id){
+        public long DeleteFile(long id){
             var file = _generalContext.File.FirstOrDefault(f => f.id == id);
             if (file != null)
             {

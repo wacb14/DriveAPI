@@ -10,16 +10,16 @@ namespace DriveAPI.BussinesServices
         {
             _fileDS = fileDS;
         }
-        public Filew GetFile(int id){
+        public Filew GetFile(long id){
             return _fileDS.GetFile(id);
         }
         public Filew PostFile(Filew file){
             return _fileDS.PostFile(file);
         }
-        public Filew PutFile(int id, Filew file){
+        public Filew PutFile(long id, Filew file){
             return _fileDS.PutFile(id, file);
         }
-        public int DeleteFile(int id){
+        public long DeleteFile(long id){
             return _fileDS.DeleteFile(id);
         }
     }

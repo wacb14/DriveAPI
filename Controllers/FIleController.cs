@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DriveAPI.Controllers
 {
 
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : ControllerBase
@@ -18,7 +18,7 @@ namespace DriveAPI.Controllers
         }
 
         [HttpGet]
-        public Filew GetFile(int id)
+        public Filew GetFile(long id)
         {
             return _fileBS.GetFile(id);
         }
@@ -28,12 +28,12 @@ namespace DriveAPI.Controllers
             return _fileBS.PostFile(file);
         }
         [HttpPut]
-        public Filew PutFile(int id, Filew file)
+        public Filew PutFile(long id, Filew file)
         {
             return _fileBS.PutFile(id, file);
         }
         [HttpDelete]
-        public int DeleteFile(int id)
+        public long DeleteFile(long id)
         {
             return _fileBS.DeleteFile(id);
         }
