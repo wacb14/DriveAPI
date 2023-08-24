@@ -1,3 +1,5 @@
+using AutoMapper;
+using Backend.Models;
 using DriveAPI.BussinesServices;
 using DriveAPI.DataServices;
 using DriveAPI.Models;
@@ -30,6 +32,16 @@ builder.Services.AddDbContext<GeneralContext>(
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Automapper
+var mapperConfig = new MapperConfiguration(
+                mc =>
+                {
+                    mc.AddProfile(new MappingProfile());
+                }
+            );
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
