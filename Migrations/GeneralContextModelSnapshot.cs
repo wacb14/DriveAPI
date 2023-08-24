@@ -39,6 +39,10 @@ namespace DriveAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("path")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("id");
 
                     b.ToTable("File");

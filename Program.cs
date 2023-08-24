@@ -16,12 +16,15 @@ builder.Services.AddTransient<IFileDS, FileDS>();
 builder.Services.AddTransient<IFileBS, FileBS>();
 builder.Services.AddTransient<IFileStorageDS, FileStorageDS>();
 builder.Services.AddTransient<IFileStorageBS, FileStorageBS>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<GeneralContext>(
             dbContextOptions => dbContextOptions
                 .UseMySQL(connectionString)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
         );
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DriveAPI.Migrations
 {
     [DbContext(typeof(GeneralContext))]
-    [Migration("20230823040626_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230824060502_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,10 @@ namespace DriveAPI.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("path")
                         .IsRequired()
                         .HasColumnType("longtext");
 
