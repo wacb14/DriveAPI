@@ -7,5 +7,7 @@ namespace DriveAPI.BussinesServices
         public Filew PostFile(Filew file);
         public Filew PutFile(long id, Filew file);
         public long DeleteFile(long id);
+        public List<Filew> GetFilesByFolderPath(string folderPath);
+
     }    
 }

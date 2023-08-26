@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using AutoMapper;
 using DriveAPI.BussinesServices;
 using DriveAPI.Models;
@@ -39,11 +40,18 @@ namespace DriveAPI.Controllers
             }
             return filesInfo;
         }
-    
+
         [HttpGet("[action]")]
-        public List<string> GetFolderContent(string folderPath)
+        public ActionResult GetFolderContent(string folderPath)
         {
-            return _fileStorageBS.GetFolderContent(folderPath.Replace("/", "\\"));
+            folderPath = folderPath.Replace('/', '\\');
+            return Ok(
+                new
+                {
+                    content = _fileStorageBS.GetFolderContent(folderPath.Replace("/", "\\")),
+                    files = _fileBS.GetFilesByFolderPath(folderPath)
+                }
+            );
         }
         [HttpPost("[action]")]
         public async Task<Filew> PostFile([FromForm] PFile completeFile)

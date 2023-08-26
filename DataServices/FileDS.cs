@@ -13,6 +13,11 @@ namespace DriveAPI.DataServices
         {
             return _generalContext.File.Find(id);
         }
+        public List<Filew> GetFilesByFolderPath(string folderPath)
+        {
+            var query = _generalContext.File.Where(f => f.folderPath == folderPath);
+            return query.ToList();
+        }
         public Filew PostFile(Filew file)
         {
             _generalContext.File.Add(file);
@@ -28,7 +33,8 @@ namespace DriveAPI.DataServices
             }
             return _generalContext.File.FirstOrDefault(f => f.id == file.id);
         }
-        public long DeleteFile(long id){
+        public long DeleteFile(long id)
+        {
             var file = _generalContext.File.FirstOrDefault(f => f.id == id);
             if (file != null)
             {
@@ -38,7 +44,7 @@ namespace DriveAPI.DataServices
             }
             else
                 return -1;
-            
+
         }
     }
 }

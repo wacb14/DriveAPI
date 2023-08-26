@@ -13,6 +13,10 @@ namespace DriveAPI.BussinesServices
         public Filew GetFile(long id){
             return _fileDS.GetFile(id);
         }
+        public List<Filew> GetFilesByFolderPath(string folderPath){
+            return _fileDS.GetFilesByFolderPath(folderPath);
+        }
+
         public Filew PostFile(Filew file){
             return _fileDS.PostFile(file);
         }
