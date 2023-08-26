@@ -23,7 +23,7 @@ namespace DriveAPI.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "longtext", nullable: false),
                     extension = table.Column<string>(type: "longtext", nullable: false),
-                    path = table.Column<string>(type: "longtext", nullable: false),
+                    folderPath = table.Column<string>(type: "longtext", nullable: false),
                     creationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     modificationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },

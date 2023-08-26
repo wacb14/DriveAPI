@@ -1,6 +1,7 @@
+using AutoMapper;
 using DriveAPI.BussinesServices;
 using DriveAPI.Models;
-using Microsoft.AspNetCore.Authorization;
+using DriveAPI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DriveAPI.Controllers
@@ -12,9 +13,13 @@ namespace DriveAPI.Controllers
     public class FileController : ControllerBase
     {
         private IFileBS _fileBS;
-        public FileController(IFileBS fileBS)
+        private IFileStorageBS _fileStorageBS;
+        private IMapper _mapper;
+        public FileController(IFileBS fileBS, IFileStorageBS fileStorageBS, IMapper mapper)
         {
             _fileBS = fileBS;
+            _fileStorageBS = fileStorageBS;
+            _mapper = mapper;
         }
 
         [HttpGet("[action]")]
@@ -23,8 +28,11 @@ namespace DriveAPI.Controllers
             return _fileBS.GetFile(id);
         }
         [HttpPost("[action]")]
-        public Filew PostFile(Filew file)
+        public async Task<Filew> PostFile([FromForm] CFile completeFile)
         {
+            completeFile.folderPath = completeFile.folderPath.Replace('/', '\\');
+            await _fileStorageBS.SaveFile(completeFile.file, completeFile.folderPath);
+            var file = _mapper.Map<Filew>(completeFile);
             return _fileBS.PostFile(file);
         }
         [HttpPut("[action]")]
@@ -35,7 +43,14 @@ namespace DriveAPI.Controllers
         [HttpDelete("[action]")]
         public long DeleteFile(long id)
         {
-            return _fileBS.DeleteFile(id);
+            var file = _fileBS.GetFile(id);
+            string filePath = Path.Combine(file.folderPath, file.name).Replace('/', '\\') + file.extension;
+            var result = _fileStorageBS.DeleteFile(filePath);
+            if (result)
+                return _fileBS.DeleteFile(id);
+            else
+                return -1;
+
         }
     }
 }

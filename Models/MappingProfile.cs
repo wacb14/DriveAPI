@@ -1,8 +1,7 @@
 using AutoMapper;
-using DriveAPI.Models;
 using DriveAPI.ViewModels;
 
-namespace Backend.Models
+namespace DriveAPI.Models
 {
     public class MappingProfile : Profile
     {

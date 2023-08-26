@@ -32,14 +32,14 @@ namespace DriveAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("folderPath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("modificationDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("path")
                         .IsRequired()
                         .HasColumnType("longtext");
 
