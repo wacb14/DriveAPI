@@ -16,12 +16,12 @@ namespace DriveAPI.DataServices
         {
             // Verifies if there's an error with the host path
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-            if(string.IsNullOrEmpty(wwwRootPath))
+            if (string.IsNullOrEmpty(wwwRootPath))
                 throw new Exception();
-            
+
             // Creates the folder if it doesn't exists
             string folderPath = Path.Combine(wwwRootPath, container);
-            if(!Directory.Exists(folderPath))
+            if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
 
             // Defines the final file's path and writes all the bytes
@@ -43,17 +43,40 @@ namespace DriveAPI.DataServices
             string wwwRootPath = _webHostEnvironment.WebRootPath;
 
             // Verifies if there's an error with the host path
-            if(string.IsNullOrEmpty(wwwRootPath)){
+            if (string.IsNullOrEmpty(wwwRootPath))
+            {
                 return false;
             }
             // Combine the host path with the relative file path
             string finalPath = Path.Combine(wwwRootPath, path);
-            if(!File.Exists(finalPath))
+            if (!File.Exists(finalPath))
                 return false;
-            else{
+            else
+            {
                 File.Delete(finalPath);
                 return true;
             }
+        }
+        public List<string> GetFolderContent(string folderPath)
+        {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            
+            // Verifies if there's an error with the host path
+            if (string.IsNullOrEmpty(wwwRootPath))
+            {
+                throw new Exception();
+            }
+            string completePath = Path.Combine(wwwRootPath, folderPath);
+
+            var content = new List<string>();
+            string[] files = Directory.GetFiles(completePath);
+            foreach (string file in files)
+                content.Add(Path.GetFileName(file));
+
+            string[] directories = Directory.GetDirectories(completePath);
+            foreach (string directory in directories)
+                content.Add(Path.GetFileName(directory));
+            return content;
         }
     }
 }

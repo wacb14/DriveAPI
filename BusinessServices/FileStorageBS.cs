@@ -41,5 +41,8 @@ namespace DriveAPI.BussinesServices
         {
             return _fileStorageDS.DeleteFile(path);
         }
+        public List<string> GetFolderContent(string folderPath){
+            return _fileStorageDS.GetFolderContent(folderPath);
+        }
     }
 }

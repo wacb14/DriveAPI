@@ -23,9 +23,27 @@ namespace DriveAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public Filew GetFile(long id)
+        public Filew GetFileInfo(long id)
         {
             return _fileBS.GetFile(id);
+        }
+        [HttpPost("[action]")]
+        public List<Filew> GetFilesInfo(List<long> ids)
+        {
+            var filesInfo = new List<Filew>();
+            foreach (long id in ids)
+            {
+                var file = _fileBS.GetFile(id);
+                if (file != null)
+                    filesInfo.Add(file);
+            }
+            return filesInfo;
+        }
+    
+        [HttpGet("[action]")]
+        public List<string> GetFolderContent(string folderPath)
+        {
+            return _fileStorageBS.GetFolderContent(folderPath.Replace("/", "\\"));
         }
         [HttpPost("[action]")]
         public async Task<Filew> PostFile([FromForm] PFile completeFile)
@@ -35,11 +53,11 @@ namespace DriveAPI.Controllers
             var file = _mapper.Map<Filew>(completeFile);
             return _fileBS.PostFile(file);
         }
-        [HttpPut("[action]")]
-        public Filew PutFile(long id, Filew file)
-        {
-            return _fileBS.PutFile(id, file);
-        }
+        // [HttpPut("[action]")]
+        // public Filew PutFile(long id, Filew file)
+        // {
+        //     return _fileBS.PutFile(id, file);
+        // }
         [HttpDelete("[action]")]
         public long DeleteFile(long id)
         {
