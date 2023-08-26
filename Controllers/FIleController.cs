@@ -28,7 +28,7 @@ namespace DriveAPI.Controllers
             return _fileBS.GetFile(id);
         }
         [HttpPost("[action]")]
-        public async Task<Filew> PostFile([FromForm] CFile completeFile)
+        public async Task<Filew> PostFile([FromForm] PFile completeFile)
         {
             completeFile.folderPath = completeFile.folderPath.Replace('/', '\\');
             await _fileStorageBS.SaveFile(completeFile.file, completeFile.folderPath);
