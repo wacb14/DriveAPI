@@ -5,6 +5,7 @@ using DriveAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // DB parameters
 var dbName = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("UserDB")["DBName"];
@@ -18,6 +19,18 @@ builder.Services.AddTransient<IFileBS, FileBS>();
 builder.Services.AddTransient<IFileStorageDS, FileStorageDS>();
 builder.Services.AddTransient<IFileStorageBS, FileStorageBS>();
 builder.Services.AddHttpContextAccessor();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+});
 
 builder.Services.AddControllers();
 
@@ -52,6 +65,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

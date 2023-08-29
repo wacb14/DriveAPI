@@ -60,7 +60,7 @@ namespace DriveAPI.DataServices
         public List<string> GetFolderContent(string folderPath)
         {
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-            
+
             // Verifies if there's an error with the host path
             if (string.IsNullOrEmpty(wwwRootPath))
             {
@@ -75,7 +75,7 @@ namespace DriveAPI.DataServices
 
             string[] directories = Directory.GetDirectories(completePath);
             foreach (string directory in directories)
-                content.Add(Path.GetFileName(directory));
+                content.Add(Path.GetFileName(directory) + ".dir");
             return content;
         }
     }

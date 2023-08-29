@@ -3,12 +3,12 @@ using AutoMapper;
 using DriveAPI.BussinesServices;
 using DriveAPI.Models;
 using DriveAPI.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DriveAPI.Controllers
 {
-
-
+    [EnableCors("_myAllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : ControllerBase
