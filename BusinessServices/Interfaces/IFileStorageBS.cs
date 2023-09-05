@@ -5,5 +5,6 @@ namespace DriveAPI.BussinesServices
         public Task<string> ModifyFile(IFormFile file, string folderPath);
         public bool DeleteFile(string path);
         public List<string> GetFolderContent(string folderPath);
+        public bool CreateEmptyFolder(string folderPath);
     }    
 }

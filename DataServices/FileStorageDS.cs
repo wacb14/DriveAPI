@@ -78,5 +78,22 @@ namespace DriveAPI.DataServices
                 content.Add(Path.GetFileName(directory) + ".dir");
             return content;
         }
+        public bool CreateEmptyFolder(string folderPath)
+        {
+            // Verifies if there's an error with the host path
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (string.IsNullOrEmpty(wwwRootPath))
+                throw new Exception();
+
+            // Creates the folder if it doesn't exists
+            string completeFolderPath = Path.Combine(wwwRootPath, folderPath);
+            if (!Directory.Exists(completeFolderPath))
+            {
+                Directory.CreateDirectory(completeFolderPath);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

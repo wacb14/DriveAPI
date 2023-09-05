@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using AutoMapper;
 using DriveAPI.BussinesServices;
 using DriveAPI.Models;
@@ -76,7 +75,11 @@ namespace DriveAPI.Controllers
                 return _fileBS.DeleteFile(id);
             else
                 return -1;
-
+        }
+        [HttpPost("[action]")]
+        public bool CreateEmptyFolder(string folderPath)
+        {
+            return _fileStorageBS.CreateEmptyFolder(folderPath);
         }
     }
 }

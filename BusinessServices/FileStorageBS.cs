@@ -5,7 +5,7 @@ namespace DriveAPI.BussinesServices
     public class FileStorageBS : IFileStorageBS
     {
         private IFileStorageDS _fileStorageDS;
-        public FileStorageBS (IFileStorageDS fileStorageDS)
+        public FileStorageBS(IFileStorageDS fileStorageDS)
         {
             _fileStorageDS = fileStorageDS;
         }
@@ -19,7 +19,7 @@ namespace DriveAPI.BussinesServices
             // Gets the name and extension of the file
             var fullName = file.FileName;
             var name = Path.GetFileNameWithoutExtension(fullName);
-            var extension = Path.GetExtension(fullName);            
+            var extension = Path.GetExtension(fullName);
 
             return await _fileStorageDS.SaveFile(fileBytes, folderPath, name, extension);
         }
@@ -33,7 +33,7 @@ namespace DriveAPI.BussinesServices
             // Gets the name and extension of the file
             var fullName = file.FileName;
             var name = Path.GetFileNameWithoutExtension(fullName);
-            var extension = Path.GetExtension(fullName);            
+            var extension = Path.GetExtension(fullName);
 
             return await _fileStorageDS.SaveFile(fileBytes, folderPath, name, extension);
         }
@@ -41,8 +41,13 @@ namespace DriveAPI.BussinesServices
         {
             return _fileStorageDS.DeleteFile(path);
         }
-        public List<string> GetFolderContent(string folderPath){
+        public List<string> GetFolderContent(string folderPath)
+        {
             return _fileStorageDS.GetFolderContent(folderPath);
+        }
+        public bool CreateEmptyFolder(string folderPath)
+        {
+            return _fileStorageDS.CreateEmptyFolder(folderPath);
         }
     }
 }

@@ -3,5 +3,6 @@ namespace DriveAPI.DataServices{
         public Task<string> SaveFile(byte[] file, string container, string name, string extension);
         public bool DeleteFile(string path);
         public List<string> GetFolderContent(string folderPath);
+        public bool CreateEmptyFolder(string folderPath);
     }
 }
