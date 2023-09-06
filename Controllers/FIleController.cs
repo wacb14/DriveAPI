@@ -43,18 +43,33 @@ namespace DriveAPI.Controllers
         [HttpGet("[action]")]
         public ActionResult GetFolderContent(string folderPath)
         {
+            folderPath = folderPath.Replace("root", "");
             folderPath = folderPath.Replace('/', '\\');
             return Ok(
                 new
                 {
-                    content = _fileStorageBS.GetFolderContent(folderPath.Replace("/", "\\")),
+                    content = _fileStorageBS.GetFolderContent(folderPath),
                     files = _fileBS.GetFilesByFolderPath(folderPath)
                 }
             );
         }
+        // [HttpGet("[action]")]
+        // public ActionResult GetFolderContent()
+        // {
+        //     string folderPath="";
+        //     folderPath = folderPath.Replace('/', '\\');
+        //     return Ok(
+        //         new
+        //         {
+        //             content = _fileStorageBS.GetFolderContent(folderPath.Replace("/", "\\")),
+        //             files = _fileBS.GetFilesByFolderPath(folderPath)
+        //         }
+        //     );
+        // }
         [HttpPost("[action]")]
         public async Task<Filew> PostFile([FromForm] PFile completeFile)
         {
+            completeFile.folderPath = completeFile.folderPath.Replace("root", ""); ;
             completeFile.folderPath = completeFile.folderPath.Replace('/', '\\');
             await _fileStorageBS.SaveFile(completeFile.file, completeFile.folderPath);
             var file = _mapper.Map<Filew>(completeFile);
@@ -70,8 +85,10 @@ namespace DriveAPI.Controllers
         {
             var file = _fileBS.GetFile(id);
             string filePath = Path.Combine(file.folderPath, file.name).Replace('/', '\\') + file.extension;
+            // Delete bytes
             var result = _fileStorageBS.DeleteFile(filePath);
             if (result)
+                // Delete from DB
                 return _fileBS.DeleteFile(id);
             else
                 return -1;
